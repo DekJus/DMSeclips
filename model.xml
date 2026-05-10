@@ -142,6 +142,8 @@
 					<feature mandatory="false" name="NFC"/>
 					<feature mandatory="false" name="I2C"/>
 					<feature mandatory="false" name="Cellular"/>
+					<feature mandatory="false" name="CANBUS"/>\
+		     		<feature mandatory="false" name="ISOBUS"/>
 
 					<!-- Application Protocols: optional, OR-group -->
 					<or abstract="true" mandatory="false" name="ApplicationProtocols">
@@ -149,8 +151,6 @@
 						<feature mandatory="true"  name="HTTPS"/>
 						<feature mandatory="false" name="CoAP"/>
 						<feature mandatory="false" name="AMQP"/>
-						<feature mandatory="false" name="CANBUS"/>
-						<feature mandatory="false" name="ISOBUS"/>
 					</or>
 
 					<feature mandatory="false" name="IoTBrokers"/>
