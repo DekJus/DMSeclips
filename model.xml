@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<featureModel>
+	<properties>
+		<graphics key="autolayoutconstraints" value="false"/>
+		<graphics key="legendautolayout" value="true"/>
+		<graphics key="showconstraints" value="true"/>
+		<graphics key="showshortnames" value="false"/>
+		<graphics key="layout" value="vertical"/>
+		<graphics key="showcollapsedconstraints" value="true"/>
+		<graphics key="legendhidden" value="false"/>
+		<graphics key="layoutalgorithm" value="1"/>
+	</properties>
+	<struct>
+
+		<!-- ╔══════════════════════════════════════════════════════════╗ -->
+		<!-- ║              DATA MANAGEMENT SYSTEM (Root)              ║ -->
+		<!-- ╚══════════════════════════════════════════════════════════╝ -->
+		<and abstract="true" mandatory="true" name="DataManagementSystem">
+			<graphics key="collapsed" value="false"/>
+
+			<!-- ════════════════════════════════════ -->
+			<!--               DATA                  -->
+			<!-- ════════════════════════════════════ -->
+			<and abstract="true" mandatory="true" name="Data">
+				<graphics key="collapsed" value="false"/>
+
+				<!-- Mobility: optional -->
+				<and mandatory="false" name="Mobility">
+					<feature mandatory="false" name="Stream"/>
+					<feature mandatory="false" name="Batch"/>
+				</and>
+
+				<!-- Data Structure: mandatory -->
+				<and abstract="true" mandatory="true" name="DataStructure">
+
+					<!-- Structured: mandatory (gray box) -->
+					<and mandatory="true" name="Structured">
+						<feature mandatory="false" name="QuantitativeData"/>
+						<feature mandatory="false" name="CSV"/>
+					</and>
+
+					<!-- Semi-Structured: optional -->
+					<and mandatory="false" name="SemiStructured">
+						<feature mandatory="false" name="JSON"/>
+						<feature mandatory="false" name="XML_Format"/>
+					</and>
+
+					<!-- Unstructured: mandatory (gray box) -->
+					<and mandatory="true" name="Unstructured">
+						<feature mandatory="true"  name="ImageryData"/>
+						<feature mandatory="false" name="VideoCapture"/>
+					</and>
+
+				</and>
+
+				<!-- Data Aggregation: optional -->
+				<and mandatory="false" name="DataAggregation">
+					<feature mandatory="false" name="DataFusion"/>
+					<feature mandatory="false" name="IncrementalDataIngestion"/>
+					<feature mandatory="false" name="Integration"/>
+				</and>
+
+			</and>
+
+
+			<!-- ════════════════════════════════════ -->
+			<!--          DATA ACQUISITION           -->
+			<!-- ════════════════════════════════════ -->
+			<and abstract="true" mandatory="true" name="DataAcquisition">
+				<graphics key="collapsed" value="false"/>
+
+				<!-- Sensing & Hardware -->
+				<and abstract="true" mandatory="true" name="SensingAndHardware">
+
+					<!-- Ground Sensing / IoT Sensor: mandatory -->
+					<and mandatory="true" name="GroundSensing_IoTSensor">
+						<feature mandatory="false" name="ThermalSensor"/>
+						<feature mandatory="true"  name="MoistureSensor"/>
+						<feature mandatory="true"  name="EnvironmentalSensor"/>
+						<feature mandatory="false" name="RainSensor"/>
+						<feature mandatory="false" name="NutrientSensor"/>
+						<feature mandatory="false" name="pHSensor"/>
+						<feature mandatory="false" name="UltrasonicSensor"/>
+						<feature mandatory="false" name="GasSensor"/>
+					</and>
+
+					<!-- Remote Sensing: mandatory -->
+					<and mandatory="true" name="RemoteSensing">
+						<feature mandatory="false" name="Satellite"/>
+						<feature mandatory="false" name="LiDAR"/>
+						<feature mandatory="false" name="Aerial"/>
+					</and>
+
+					<!-- Camera: mandatory, OR-group children -->
+					<or mandatory="true" name="Camera">
+						<feature mandatory="false" name="RGBCamera"/>
+						<feature mandatory="false" name="MultispectralCamera"/>
+						<feature mandatory="false" name="ThermalCamera"/>
+						<feature mandatory="false" name="HyperspectralCamera"/>
+					</or>
+
+					<!-- Spatial Technologies: optional -->
+					<and abstract="true" mandatory="false" name="SpatialTechnologies">
+						<feature mandatory="true"  name="GPS"/>
+						<feature mandatory="false" name="GIS"/>
+						<feature mandatory="false" name="GNSS"/>
+						<feature mandatory="false" name="VariableRateTechnology"/>
+					</and>
+
+					<!-- Weather Station: mandatory -->
+					<feature mandatory="true"  name="WeatherStation"/>
+
+					<!-- Other hardware: optional -->
+					<feature mandatory="false" name="Microcontroller"/>
+					<feature mandatory="false" name="PCB"/>
+					<feature mandatory="false" name="PC"/>
+
+				</and>
+
+				<!-- Smart Machinery: optional -->
+				<and mandatory="false" name="SmartMachinery">
+					<feature mandatory="true"  name="UAV_Drone"/>
+					<feature mandatory="false" name="UGV"/>
+					<feature mandatory="false" name="AutonomousTractors"/>
+					<feature mandatory="false" name="RoboticHarvesters"/>
+					<feature mandatory="false" name="AgroBots"/>
+					<feature mandatory="false" name="AutonomousVehicles"/>
+				</and>
+
+				<!-- Data Transfer / Communication: mandatory -->
+				<and abstract="true" mandatory="true" name="DataTransferCommunication">
+
+					<!-- WSN: mandatory -->
+					<and mandatory="true" name="WirelessSensorNetwork">
+						<feature mandatory="false" name="ZigBee"/>
+						<feature mandatory="false" name="LoRaWAN"/>
+					</and>
+
+					<feature mandatory="true"  name="WiFi"/>
+					<feature mandatory="false" name="Bluetooth"/>
+					<feature mandatory="false" name="RFID"/>
+					<feature mandatory="false" name="NFC"/>
+					<feature mandatory="false" name="I2C"/>
+					<feature mandatory="false" name="Cellular"/>
+
+					<!-- Application Protocols: optional, OR-group -->
+					<or abstract="true" mandatory="false" name="ApplicationProtocols">
+						<feature mandatory="true"  name="MQTT"/>
+						<feature mandatory="true"  name="HTTPS"/>
+						<feature mandatory="false" name="CoAP"/>
+						<feature mandatory="false" name="AMQP"/>
+						<feature mandatory="false" name="CANBUS"/>
+						<feature mandatory="false" name="ISOBUS"/>
+					</or>
+
+					<feature mandatory="false" name="IoTBrokers"/>
+
+				</and>
+
+				<!-- Data Loading & Logging: optional -->
+				<and mandatory="false" name="DataLoadingAndLogging">
+
+					<feature mandatory="false" name="DataIngestion"/>
+
+					<and mandatory="false" name="UploadingMechanism">
+						<feature mandatory="false" name="BatchUploading"/>
+						<feature mandatory="false" name="StreamUploading"/>
+					</and>
+
+					<and mandatory="false" name="TargetStorage">
+						<feature mandatory="false" name="CloudDatabaseUploading"/>
+						<feature mandatory="false" name="LocalDatabaseUploading"/>
+					</and>
+
+					<and mandatory="false" name="LogTypes">
+						<feature mandatory="false" name="AutomatedFieldOperationLogs"/>
+						<feature mandatory="false" name="SystemEventLogs"/>
+						<feature mandatory="false" name="TamperProofLogs"/>
+					</and>
+
+					<feature mandatory="false" name="TerminalLogging"/>
+
+					<and mandatory="false" name="LoggedParameters">
+						<feature mandatory="false" name="Timestamp"/>
+						<feature mandatory="false" name="GPSCoordinates"/>
+					</and>
+
+				</and>
+
+			</and>
+
+
+			<!-- ════════════════════════════════════ -->
+			<!--           DATA STORAGE              -->
+			<!-- ════════════════════════════════════ -->
+			<and abstract="true" mandatory="true" name="DataStorage">
+				<graphics key="collapsed" value="false"/>
+
+				<!-- Computing Infrastructure: mandatory, OR-group -->
+				<or abstract="true" mandatory="true" name="ComputingInfrastructure">
+					<feature mandatory="false" name="CloudComputing"/>
+					<feature mandatory="false" name="EdgeComputing"/>
+					<feature mandatory="false" name="LocalHost"/>
+					<feature mandatory="false" name="StandAlone"/>
+					<feature mandatory="false" name="MicroSD"/>
+				</or>
+
+				<!-- Database Systems: mandatory -->
+				<and abstract="true" mandatory="true" name="DatabaseSystems">
+					<feature mandatory="true"  name="SQLDatabase_Relational"/>
+					<feature mandatory="false" name="NoSQL_DistributedDB"/>
+					<feature mandatory="false" name="DataWarehouse"/>
+					<feature mandatory="false" name="MetadataManagement"/>
+					<feature mandatory="false" name="DataLake"/>
+				</and>
+
+			</and>
+
+
+			<!-- ════════════════════════════════════ -->
+			<!--          DATA PROCESSING            -->
+			<!-- ════════════════════════════════════ -->
+			<and abstract="true" mandatory="true" name="DataProcessing">
+				<graphics key="collapsed" value="false"/>
+
+				<!-- Data Preprocessing & Preparation: mandatory -->
+				<and abstract="true" mandatory="true" name="DataPreprocessingAndPreparation">
+
+					<!-- Data Cleansing: mandatory (gray box) -->
+					<and mandatory="true" name="DataCleansing">
+						<feature mandatory="false" name="Normalization"/>
+						<feature mandatory="false" name="Imputation_AIBased"/>
+						<feature mandatory="false" name="NumericTransformation"/>
+						<feature mandatory="false" name="FeatureEngineering"/>
+						<feature mandatory="false" name="DataAugmentation"/>
+						<feature mandatory="false" name="ImageResizing"/>
+						<feature mandatory="false" name="ColorNormalization"/>
+						<feature mandatory="false" name="BrightnessAdjustment"/>
+						<feature mandatory="false" name="NoiseInjection"/>
+						<feature mandatory="false" name="Encoding"/>
+					</and>
+
+					<!-- Data Splitting: optional -->
+					<and mandatory="false" name="DataSplitting">
+						<feature mandatory="false" name="Training"/>
+						<feature mandatory="false" name="Testing"/>
+					</and>
+
+					<feature mandatory="false" name="FeatureExtraction"/>
+
+					<!-- Data Pipeline Tools: optional -->
+					<and mandatory="false" name="DataPipelineTools">
+						<feature mandatory="false" name="Pandas"/>
+						<feature mandatory="false" name="Dask"/>
+						<feature mandatory="false" name="Generators"/>
+					</and>
+
+				</and>
+
+				<!-- Image Processing: optional -->
+				<and abstract="true" mandatory="false" name="ImageProcessing">
+
+					<and mandatory="false" name="Photogrammetry">
+						<feature mandatory="false" name="Orthophoto"/>
+						<feature mandatory="false" name="P3D_DEMs"/>
+					</and>
+
+					<and mandatory="false" name="ImageAnnotation">
+						<feature mandatory="false" name="CVAT"/>
+						<feature mandatory="false" name="LabelingManual"/>
+					</and>
+
+					<!-- Image Analysis: mandatory within ImageProcessing -->
+					<and mandatory="true" name="ImageAnalysis">
+						<feature mandatory="false" name="ObjectBased"/>
+						<feature mandatory="false" name="PixelBased"/>
+					</and>
+
+				</and>
+
+				<!-- Data Analytics Method: mandatory -->
+				<and abstract="true" mandatory="true" name="DataAnalyticsMethod">
+
+					<!-- Machine Learning: mandatory, OR-group -->
+					<or abstract="true" mandatory="true" name="MachineLearning">
+						<feature mandatory="true"  name="RandomForest"/>
+						<feature mandatory="false" name="SVM"/>
+						<feature mandatory="false" name="kNN"/>
+						<feature mandatory="false" name="DecisionTree"/>
+						<feature mandatory="false" name="NaiveBayes"/>
+						<feature mandatory="false" name="XGBoost"/>
+						<feature mandatory="false" name="GradientBoosting"/>
+					</or>
+
+					<!-- Deep Learning: optional -->
+					<and abstract="true" mandatory="false" name="DeepLearning">
+						<feature mandatory="true"  name="CNN"/>
+						<feature mandatory="false" name="RNN"/>
+						<feature mandatory="false" name="LSTM"/>
+						<feature mandatory="false" name="BiLSTM"/>
+						<feature mandatory="false" name="MLP"/>
+						<feature mandatory="false" name="MangoYOLO"/>
+						<feature mandatory="false" name="AgroDeepLearning"/>
+					</and>
+
+					<!-- Regression & Classification: optional -->
+					<and abstract="true" mandatory="false" name="RegressionAndClassification">
+						<feature mandatory="false" name="LinearRegression"/>
+						<feature mandatory="false" name="PolynomialRegression"/>
+						<feature mandatory="false" name="MultipleLinearRegression"/>
+					</and>
+
+					<!-- Big Data Analytics & Clustering: optional -->
+					<and mandatory="false" name="BigDataAnalyticsAndClustering">
+						<feature mandatory="false" name="MapReduceAndSpark"/>
+						<feature mandatory="false" name="DataMining"/>
+					</and>
+
+					<!-- Statistical & Math Model: optional -->
+					<and mandatory="false" name="StatisticalAndMathModel">
+						<feature mandatory="false" name="SpatialAnalysis"/>
+						<feature mandatory="false" name="GeospatialAnalysis"/>
+						<feature mandatory="false" name="InvasiveWeedOptimization"/>
+					</and>
+
+					<!-- Expert System: optional -->
+					<and mandatory="false" name="ExpertSystem">
+						<feature mandatory="false" name="FuzzyLogic"/>
+						<feature mandatory="false" name="OFIS"/>
+						<feature mandatory="false" name="ForwardChaining"/>
+					</and>
+
+				</and>
+
+			</and>
+
+
+			<!-- ════════════════════════════════════ -->
+			<!--         DATA VISUALIZATION          -->
+			<!-- ════════════════════════════════════ -->
+			<and abstract="true" mandatory="true" name="DataVisualization">
+				<graphics key="collapsed" value="false"/>
+
+				<!-- Temporal Visualization: optional -->
+				<and mandatory="false" name="TemporalVisualization">
+					<feature mandatory="false" name="TemporalTrendGraph"/>
+					<feature mandatory="false" name="LineGraph"/>
+					<feature mandatory="false" name="Timelines"/>
+					<feature mandatory="false" name="ScatterPlot"/>
+				</and>
+
+				<!-- Multidimensional Visualization: optional -->
+				<and mandatory="false" name="MultidimensionalVisualization">
+					<feature mandatory="false" name="Histogram"/>
+					<feature mandatory="false" name="BarGraph"/>
+					<feature mandatory="false" name="BoxPlot"/>
+					<feature mandatory="false" name="PieChart"/>
+				</and>
+
+				<!-- Geospatial Visualization: mandatory (gray box + endFill=1) -->
+				<and mandatory="true" name="GeospatialVisualization">
+					<feature mandatory="true"  name="YieldMaps"/>
+					<feature mandatory="false" name="HeatMaps_FlowMaps"/>
+					<feature mandatory="true"  name="NDVIMap"/>
+					<feature mandatory="false" name="SoilMaps"/>
+					<feature mandatory="false" name="VegetationIndicesMaps"/>
+					<feature mandatory="false" name="FlowMaps"/>
+				</and>
+
+			</and>
+
+
+			<!-- ════════════════════════════════════ -->
+			<!--      DATA MONITORING & REPORTING    -->
+			<!-- ════════════════════════════════════ -->
+			<and abstract="true" mandatory="true" name="DataMonitoringAndReporting">
+				<graphics key="collapsed" value="false"/>
+
+				<!-- User Interface: mandatory -->
+				<and abstract="true" mandatory="true" name="UserInterface">
+					<feature mandatory="true"  name="WebApplication"/>
+					<feature mandatory="true"  name="MobileApplication"/>
+					<feature mandatory="false" name="Windows"/>
+				</and>
+
+				<!-- Dashboard: mandatory (gray box) -->
+				<feature mandatory="true" name="Dashboard"/>
+
+				<!-- Information Management & Reporting: mandatory -->
+				<and mandatory="true" name="InformationManagementAndReporting">
+					<and mandatory="false" name="FMISTools">
+						<feature mandatory="false" name="Akkerweb"/>
+						<feature mandatory="false" name="Agrivi_FieldView"/>
+					</and>
+				</and>
+
+				<!-- Real-Time Monitoring: mandatory -->
+				<and mandatory="true" name="RealTimeMonitoring">
+					<feature mandatory="false" name="SCADA"/>
+				</and>
+
+				<!-- DSS: mandatory (gray box) -->
+				<feature mandatory="true" name="DecisionSupportSystem_DSS"/>
+
+				<!-- Alert System: optional -->
+				<and mandatory="false" name="AlertSystem">
+					<feature mandatory="false" name="AutomatedAlerts"/>
+				</and>
+
+			</and>
+
+
+			<!-- ════════════════════════════════════ -->
+			<!--           DATA SECURITY             -->
+			<!-- ════════════════════════════════════ -->
+			<and abstract="true" mandatory="false" name="DataSecurity">
+				<graphics key="collapsed" value="false"/>
+
+				<!-- Confidentiality & Privacy: optional -->
+				<and abstract="true" mandatory="false" name="ConfidentialityAndPrivacy">
+					<feature mandatory="false" name="FederatedLearning"/>
+					<feature mandatory="false" name="DifferentialPrivacyTechniques"/>
+				</and>
+
+				<!-- Encryption / Security Mechanisms: optional -->
+				<and abstract="true" mandatory="false" name="EncryptionSecurityMechanisms">
+					<feature mandatory="false" name="Kriptografi_Enkripsi"/>
+					<feature mandatory="false" name="HomomorphicEncryption"/>
+					<feature mandatory="false" name="LightweightCryptography"/>
+				</and>
+
+				<!-- Authorization & Authentication: optional -->
+				<and abstract="true" mandatory="false" name="AuthorizationAndAuthentication">
+					<feature mandatory="false" name="DigitalSignature"/>
+				</and>
+
+				<!-- Interoperability & Context Management: optional -->
+				<feature mandatory="false" name="InteroperabilityAndContextManagement"/>
+
+			</and>
+
+		</and>
+	</struct>
+</featureModel>
