@@ -79,7 +79,6 @@
 					<feature name="UGV"/>
 					<feature name="Autonomous Tractors"/>
 					<feature name="Robotic Harvesters"/>
-					<feature name="Agro Bots"/>
 					<feature name="Autonomous Vehicles"/>
 				</and>
 				<and abstract="true" mandatory="true" name="Data Transfer Communication">
@@ -130,8 +129,6 @@
 				<and abstract="true" mandatory="true" name="Database Systems">
 					<feature mandatory="true" name="SQL Database Relational"/>
 					<feature name="NoSQL Distributed DB"/>
-					<feature name="Data Warehouse"/>
-					<feature name="Metadata Management"/>
 					<feature name="Data Lake"/>
 				</and>
 			</and>
@@ -154,12 +151,9 @@
 						<feature name="Training"/>
 						<feature name="Testing"/>
 					</and>
-					<feature name="Feature Extraction"/>
-					<and name="Data Pipeline Tools">
-						<feature name="Pandas"/>
-						<feature name="Dask"/>
-						<feature name="Generators"/>
-					</and>
+					<feature name="Pandas"/>
+					<feature name="Dask"/>
+					<feature name="Generators"/>
 				</and>
 				<and abstract="true" name="Image Processing">
 					<and name="Photogrammetry">
@@ -226,16 +220,12 @@
 				<and name="Multidimensional Visualization">
 					<feature name="Histogram"/>
 					<feature name="Bar Graph"/>
-					<feature name="Box Plot"/>
-					<feature name="Pie Chart"/>
 				</and>
 				<and mandatory="true" name="Geospatial Visualization">
 					<feature mandatory="true" name="Yield Maps"/>
-					<feature name="Heat Maps Flow Maps"/>
 					<feature mandatory="true" name="NDVI Map"/>
 					<feature name="Soil Maps"/>
 					<feature name="Vegetation Indices Maps"/>
-					<feature name="Flow Maps"/>
 				</and>
 			</and>
 			<and abstract="true" mandatory="true" name="Data Monitoring And Reporting">
@@ -274,7 +264,6 @@
 				<and abstract="true" name="Authorization And Authentication">
 					<feature name="Digital Signature"/>
 				</and>
-				<feature name="Interoperability And Context Management"/>
 			</and>
 		</and>
 	</struct>
